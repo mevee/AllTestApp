@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.note.EditViewNoteFragment">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp48"
+                android:layout_marginBottom="@dimen/dp16"
+                android:ellipsize="end"
+                android:fontFamily="@font/acme_reg"
+                android:lineSpacingExtra="2.5dp"
+                android:maxLines="1"
+                android:text="Title"
+                android:textSize="@dimen/h16"
+                android:transitionName="title"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivSave"
+                android:layout_width="@dimen/dp24"
+                android:layout_height="@dimen/dp24"
+                android:layout_gravity="center_vertical|end"
+                android:layout_margin="@dimen/dp6" />
+        </FrameLayout>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:background="@drawable/card_grey"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="2.5dp"
+            android:padding="@dimen/dp8"
+            android:text="Write from here."
+            android:textSize="@dimen/h16"
+
+            />
+
+    </LinearLayout>
+</layout>

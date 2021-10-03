@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/allNotesFragment"
+        android:name="com.pareminder.noteFeature.AllNotesFragment"
+        android:label="AllNotesFragment">
+        <action
+            android:id="@+id/action_allNotesFragment_to_editViewNoteFragment"
+            app:destination="@id/editViewNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editViewNoteFragment"
+        android:name="com.pareminder.noteFeature.EditViewNoteFragment"
+        android:label="EditViewNoteFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.pareminder.home.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_allNotesFragment"
+            app:destination="@id/allNotesFragment" />
+    </fragment>
+
+
+</navigation>

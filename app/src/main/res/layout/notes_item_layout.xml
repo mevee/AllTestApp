@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp8"
+        android:layout_marginEnd="@dimen/dp16"
+
+        android:layout_marginBottom="@dimen/dp8">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bgNoteItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp16"
+                android:fontFamily="@font/acme_reg"
+                android:lineSpacingExtra="2.5dp"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:text="Hellow Worl"
+                android:textSize="@dimen/h16"
+                android:transitionName="title"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivIcons"
+                android:layout_width="@dimen/dp16"
+                android:layout_height="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp6"
+                android:src="@drawable/ic_baseline_access_time_24"
+                app:layout_constraintStart_toStartOf="@+id/tvMessage"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                 android:fontFamily="@font/acme_reg"
+                android:lineSpacingExtra="2.5dp"
+                android:layout_marginStart="@dimen/dp4"
+                android:maxLines="1"
+                android:text="HelloeWorl"
+                android:textSize="@dimen/h10"
+                app:layout_constraintBottom_toBottomOf="@+id/ivIcons"
+                app:layout_constraintStart_toEndOf="@+id/ivIcons"
+                app:layout_constraintTop_toTopOf="@+id/ivIcons" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="DELETE"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="EDIT"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/greyBlack" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

@@ -25,8 +25,6 @@ abstract class NetworkProvider {
             }
         }
 
-
-
         private fun getClient():OkHttpClient{
             return OkHttpClient()/*.callTimeoutMillis(OkHttpClient.Builder.)*/
         }

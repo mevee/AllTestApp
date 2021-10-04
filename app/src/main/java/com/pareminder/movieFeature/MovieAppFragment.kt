@@ -1,29 +1,28 @@
-package com.pareminder.home
+package com.pareminder.movieFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import com.pareminder.R
-import com.pareminder.databinding.FragmentMainBinding
+import com.pareminder.data.network.NetworkProvider
+import com.pareminder.data.repository.MovieRepository
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
+ * Use the [MovieAppFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MainFragment : Fragment() {
+class MovieAppFragment : Fragment() {
      private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding:FragmentMainBinding
+    private lateinit var movieViewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,24 +36,23 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_main, container, false)
+        val apiService = NetworkProvider.newInstance()
+        val movieRepository = MovieRepository(apiService)
+        val moviewFactory = MovieViewModelFactory(movieRepository)
+        movieViewModel = ViewModelProvider(this,moviewFactory).get(MovieViewModel::class.java)
 
-        binding.btnNetworking.setOnClickListener({
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_movieAppFragment)
+        movieViewModel.movies.observe(viewLifecycleOwner,({
+            it?.let {
 
-        })
-        binding.btnNoteApp.setOnClickListener({
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_allNotesFragment)
-        })
-        return binding.root
+            }
+        }))
+        return inflater.inflate(R.layout.fragment_movie_app, container, false)
     }
 
     companion object {
-
-         @JvmStatic
+                @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
+            MovieAppFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

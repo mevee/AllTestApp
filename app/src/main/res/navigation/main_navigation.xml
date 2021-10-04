@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/mainFragment">
 
@@ -24,7 +25,15 @@
         <action
             android:id="@+id/action_mainFragment_to_allNotesFragment"
             app:destination="@id/allNotesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_movieAppFragment"
+            app:destination="@id/movieAppFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/movieAppFragment"
+        android:name="com.pareminder.movieFeature.MovieAppFragment"
+        android:label="fragment_movie_app"
+        tools:layout="@layout/fragment_movie_app" />
 
 
 </navigation>

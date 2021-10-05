@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pareminder.data.local_db.tables.Note
-import com.pareminder.data.repository.NotesRepository
+import com.pareminder.repository.NotesRepository
 import com.pareminder.common.ScreenState
 import kotlinx.coroutines.launch
 
 class NoteViewModel(val repository: NotesRepository) : ViewModel() {
     private val _notesList = MutableLiveData<List<Note>>()
-    val screenState = MutableLiveData<ScreenState>()
+    lateinit var screenState : ScreenState
     val notes: LiveData<List<Note>> get() = _notesList
 
   /*  init {
@@ -19,18 +19,18 @@ class NoteViewModel(val repository: NotesRepository) : ViewModel() {
     }
 */
     public fun loadAllNotes() {
-        screenState.postValue(ScreenState.Lading())
+      screenState?.lading()
         viewModelScope.launch {
             val notes = repository.getAllNotes();
             notes?.let {
                 _notesList.postValue(it)
             }
-            screenState.postValue(ScreenState.Completed())
+            screenState?.completed()
         }
     }
 
     fun saveNotes(note: Note) {
-        screenState.postValue(ScreenState.Lading())
+        screenState?.lading()
         if (note == null) {
 
         } else {
@@ -42,7 +42,7 @@ class NoteViewModel(val repository: NotesRepository) : ViewModel() {
     }
 
     fun removeNote(note: Note,position:Int) {
-        screenState.postValue(ScreenState.Lading())
+        screenState?.lading()
         if (note == null) {
 
         } else {

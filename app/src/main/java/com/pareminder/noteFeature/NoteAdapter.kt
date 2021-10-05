@@ -31,7 +31,7 @@ class NoteAdapter(
         bind.tvDate.text = data.time
         bind.tvMessage.text = "${data.message}\n.......\n......."
 
-        bind.bgNoteItem.setOnClickListener {
+        bind.mainNote.setOnClickListener {
             clickListener.onItemClicked(position, EventConst.CLICKED)
         }
 

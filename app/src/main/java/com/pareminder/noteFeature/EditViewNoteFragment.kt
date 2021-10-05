@@ -8,15 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.pareminder.R
 import com.pareminder.common.ScreenState
+import com.pareminder.common.State
 import com.pareminder.common.printMessage
 import com.pareminder.data.local_db.NotesDatabase
 import com.pareminder.data.local_db.tables.Note
-import com.pareminder.data.repository.NotesRepository
+import com.pareminder.repository.NotesRepository
 import com.pareminder.databinding.FragmentEditNoteBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +23,7 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "id"
 
-class EditViewNoteFragment : Fragment() {
+class EditViewNoteFragment : Fragment() , ScreenState{
     private var param1: String? = null
     private var param2: String? = null
     private var note: Note? = null
@@ -54,10 +53,8 @@ class EditViewNoteFragment : Fragment() {
         notesRepository = NotesRepository(database)
         val noteViewModelFactory = NoteViewModelFactory(notesRepository)
         viewModel = ViewModelProvider(this, noteViewModelFactory).get(NoteViewModel::class.java)
+        viewModel.screenState = this
 
-        viewModel.screenState.observe(viewLifecycleOwner, {
-            handleScreenSate(it)
-        })
 
         binding.back.setOnClickListener {
             onBackPressed()
@@ -127,19 +124,17 @@ class EditViewNoteFragment : Fragment() {
 
     }
 
-    private fun handleScreenSate(it: ScreenState?) {
-        it?.let {
-            if (it is ScreenState.Lading) {
-                binding.progressEdit.isVisible = true
-            } else if (it is ScreenState.Completed) {
-                binding.progressEdit.isVisible = false
-            } else {
-                binding.progressEdit.isVisible = false
-            }
-        }
-
+    override fun lading() {
+        binding.progressEdit.isVisible = true
     }
 
+    override fun completed() {
+        binding.progressEdit.isVisible = false
+    }
+
+    override fun error(errorCode: State, message: String) {
+        binding.progressEdit.isVisible = false
+    }
 
     companion object {
         @JvmStatic

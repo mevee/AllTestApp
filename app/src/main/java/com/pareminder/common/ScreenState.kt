@@ -1,16 +1,14 @@
 package com.pareminder.common
 
-sealed class ScreenState(private val state: State=State.INIT) {
+interface ScreenState {
 
-    class Lading():ScreenState(State.LOADING)
-    class Completed():ScreenState(State.COMPLETED)
-    class Error():ScreenState(State.ERROR)
+    fun lading()
+    fun completed()
+    fun error(errorCode:State=State.ERROR,message: String)
 
 }
 
 enum class State{
-    INIT,
-    LOADING,
-    COMPLETED,
-    ERROR
+    ERROR,
+    NO_CONNECTIVITI
 }

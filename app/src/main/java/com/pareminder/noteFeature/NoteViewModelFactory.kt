@@ -1,7 +1,7 @@
 package com.pareminder.noteFeature
 
 import androidx.lifecycle.*
-import com.pareminder.data.repository.NotesRepository
+import com.pareminder.repository.NotesRepository
 import androidx.lifecycle.ViewModel
 
 

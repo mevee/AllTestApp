@@ -1,4 +1,4 @@
-package com.pareminder.data.repository
+package com.pareminder.repository
 
 import com.pareminder.data.local_db.NotesDatabase
 import com.pareminder.data.local_db.tables.Note

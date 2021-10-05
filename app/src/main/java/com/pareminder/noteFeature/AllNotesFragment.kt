@@ -6,24 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pareminder.R
 import com.pareminder.data.local_db.NotesDatabase
 import com.pareminder.data.local_db.tables.Note
-import com.pareminder.data.repository.NotesRepository
+import com.pareminder.repository.NotesRepository
 import com.pareminder.databinding.FragmentAllNotesBinding
 import com.pareminder.common.EventConst
 import com.pareminder.common.ScreenState
+import com.pareminder.common.State
 import com.pareminder.ui.note.notesadapter.ListAdapterListener
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class AllNotesFragment : Fragment(), ListAdapterListener {
+class AllNotesFragment : Fragment(), ListAdapterListener, ScreenState {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -77,27 +77,12 @@ class AllNotesFragment : Fragment(), ListAdapterListener {
                 setReclerViewAdapter(list)
             }
         })
-        viewModel.screenState.observe(viewLifecycleOwner, {
-            handleScreenSate(it)
-        })
+        viewModel.screenState = this
 
 
         return binding.root
     }
 
-
-    private fun handleScreenSate(it: ScreenState?) {
-        it?.let {
-            if (it is ScreenState.Lading) {
-                binding.progressMain.isVisible = true
-            } else if (it is ScreenState.Completed) {
-                binding.progressMain.isVisible = false
-            } else {
-                binding.progressMain.isVisible = false
-            }
-        }
-
-    }
 
     private fun setReclerViewAdapter(list: List<Note>) {
         notesList.clear()
@@ -138,7 +123,6 @@ class AllNotesFragment : Fragment(), ListAdapterListener {
     }
 
 
-
     override fun onResume() {
         super.onResume()
         viewModel.loadAllNotes()
@@ -153,5 +137,17 @@ class AllNotesFragment : Fragment(), ListAdapterListener {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun lading() {
+        binding.progressMain.isVisible = true
+    }
+
+    override fun completed() {
+        binding.progressMain.isVisible = false
+    }
+
+    override fun error(errorCode: State, message: String) {
+        binding.progressMain.isVisible = false
     }
 }

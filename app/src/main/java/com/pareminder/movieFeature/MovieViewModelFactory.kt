@@ -2,7 +2,7 @@ package com.pareminder.movieFeature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pareminder.data.repository.MovieRepository
+import com.pareminder.repository.MovieRepository
 
 class MovieViewModelFactory(private val movieRepository: MovieRepository):
     ViewModelProvider.NewInstanceFactory() {
